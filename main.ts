@@ -7,18 +7,11 @@ import Logger from "./middleware/logger.ts";
 import ResponseTime from "./middleware/response-time.ts";
 import GraphQLService from "./graphql/service.ts";
 
-import * as flags from "https://deno.land/std/flags/mod.ts";
-
 const app = new Application();
 
 const env = config();
 const HOST = env.APP_HOST || "http://localhost";
-//const PORT = +env.APP_PORT || 4000;
-
-const DEFAULT_PORT = 4100;
-const {args} = Deno;
-const argPort = flags.parse(args).port;
-const PORT = argPort ? Number(argPort) : DEFAULT_PORT;
+const PORT = +env.APP_PORT || 4000;
 
 app.use(
     oakCors({
